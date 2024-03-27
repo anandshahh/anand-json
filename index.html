@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anand's Web Application</title>
+    <script>
+    function getBackendData() {
+        const url = 'https://anandshahh.github.io/anand-json/mydata.json'; 
+        fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById("dataDisplay").innerHTML = 'Name: ' + data.name + '<br>ID: ' + data.id;
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+            document.getElementById("dataDisplay").textContent = 'Error fetching data.';
+        });
+    }
+    </script>
+</head>
+<body>
+    <h1>Welcome to Anand's Web Application</h1>
+    <button onclick="getBackendData()">Fetch My Details</button>
+    <div id="dataDisplay">Your details will appear here after fetching...</div>
+</body>
+</html>
